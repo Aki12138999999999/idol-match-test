@@ -335,46 +335,52 @@ body {
 }
 
 /* =================================
-   10. 底部按钮区域 (统一风格版)
+   10. 底部按钮区域 (单按钮居中版)
    ================================= */
 
-/* 容器：负责让两个按钮并排 */
+/* 容器：负责让按钮居中 */
 .btn-container {
   display: flex;
-  justify-content: space-between; /* 两端对齐 */
-  gap: 15px;                      /* 中间间距 */
+  justify-content: center; /* 修改点：改为居中 */
+  align-items: center;     /* 垂直居中 */
   margin-top: 25px;
   width: 100%;
 }
 
-/* 统一按钮样式：两个按钮都长这样 */
+/* 统一按钮样式 */
 .home-btn {
-  flex: 1;                        /* 两个按钮平分宽度 */
-  padding: 12px;
+  /* 移除 flex: 1，因为只有一个按钮，不需要平分宽度 */
+  /* 可以设置一个最大宽度，防止在电脑上太宽，手机上自适应 */
+  min-width: 120px; 
+  max-width: 200px;
+  
+  padding: 12px 24px;    /* 增加左右内边距，让按钮更饱满 */
   border: none;
-  border-radius: 50px;            /* 圆角 */
-  background: #fff;               /* 白底 */
-  color: #666;                    /* 灰字 */
+  border-radius: 50px;   /* 圆角 */
+  background: #fff;      /* 白底 */
+  color: #666;           /* 灰字 */
   font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   transition: all 0.3s;
-  white-space: nowrap;            /* 防止文字换行 */
+  white-space: nowrap;   /* 防止文字换行 */
   text-align: center;
-  display: flex;                  /* 让图标和文字垂直居中 */
+  
+  /* 保持图标文字居中 */
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* 悬停效果：两个按钮都一样 */
+/* 悬停效果 */
 .home-btn:hover {
-  background: #f0f0f0;            /* 变浅灰 */
-  transform: translateY(-2px);    /* 微微上浮 */
+  background: #f0f0f0;
+  transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
 
-/* 点击效果 (可选，增加按压感) */
+/* 点击效果 */
 .home-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
@@ -405,7 +411,6 @@ body {
   opacity: 1;
   bottom: 50px;
 }
-
 /* ===============================
    11. 移动端适配
 ================================= */
@@ -416,4 +421,5 @@ body {
   #idolQuote { font-size: 0.95rem; }
   .rank-bar { width: 60px; }
 }
+
 
