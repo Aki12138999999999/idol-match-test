@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨时代峰峻缘分测试 - 问题6✨</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="questions.css">
+<style>
+  /* 第6题：进度 75% */
+  .container::after {
+    background-image: linear-gradient(90deg, #ff9ed6 0%, #ff9ed6 75%, #eef2f7 75%, #eef2f7 100%) !important;
+  }
+  p::before {
+    content: "第 6 题 / 共 8 题" !important;
+  }
+</style>
+<body>
+<div class="container">
+<h2>问题 6</h2>
+<p>假设你现在有一笔充足的预算和一周的假期，完全由你支配。不需要考虑别人的喜好，你最想把自己扔进什么样的环境里？</p>
+
+<form id="q6Form">
+  <input type="radio" name="q6" value="丙火" id="q6A">
+  <label for="q6A">直奔最繁华的大都市或热门景点！看霓虹灯、逛夜市、凑热闹，人越多越兴奋，感觉整个世界都在发光</label>
+
+  <input type="radio" name="q6" value="甲木" id="q6B">
+  <label for="q6B">去深山老林、大草原或者海边悬崖！必须有大山大水，要能徒步、能爬山，哪怕累得满头大汗，只要看到壮阔的风景就值了</label>
+
+  <input type="radio" name="q6" value="丁火" id="q6C">
+  <label for="q6C">找个不知名的小镇或古朴村落，住进温馨的民宿，晚上点个蜡烛或壁炉，安安静静地发呆、看书、听雨声</label>
+
+  <input type="radio" name="q6" value="戊土" id="q6D">
+  <label for="q6D">不去冒险也不赶场，选个设施完善、气候宜人的度假地，行程安排得明明白白，吃好睡好，主打一个“稳”和“舒服”</label><br>
+
+  <button type="button" id="nextBtn">下一题</button>
+</form>
+
+<script>
+document.getElementById("nextBtn").addEventListener("click", function() {
+  const answer = document.querySelector('input[name="q6"]:checked');
+  if (!answer) {
+    alert("请选择一个选项！");
+    return;
+  }
+
+  // 保存选项到 localStorage
+  localStorage.setItem("q6", answer.value);
+
+  // 跳转到第七题
+  window.location.href = "question7.html";
+});
+</script>
+</div>
+</body>
+</html>

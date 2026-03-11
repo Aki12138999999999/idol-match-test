@@ -1,0 +1,213 @@
+/* ===============================
+   全局页面样式
+================================= */
+body {
+  font-family: "Arial", "Helvetica", sans-serif; /* 系统柔和字体 */
+  color: #333;
+  background: linear-gradient(to bottom right, #cce7ff, #ffd6e7); /* 淡蓝粉渐变 */
+  margin: 0;
+  padding: 0 15px; /* 手机端左右间距 */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* 水平居中 */
+  body {
+  justify-content: center; /* 垂直居中，之前是 flex-start */
+}
+  box-sizing: border-box;
+}
+
+/* ===============================
+   所有标题、段落统一
+================================= */
+h1 {
+  font-size: 2em;
+  color: white;
+  text-align: center;
+  margin: 20px 0;
+}
+
+h2, h3 {
+  font-size: 1.5em;
+  text-align: center;
+  margin: 2px 0;
+}
+
+p, label {
+  font-size: 2em;
+  text-align: center;
+  margin: 2px 0;
+}
+
+/* ===============================
+   爱豆卡片样式
+================================= */
+.idol-card {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.idol-img {
+  width: auto;
+  height: auto;
+  max-width: 200px;   /* 限制最大宽度 */
+  border-radius: 15px; /* 圆角 */
+  display: block;
+  margin: 5px auto;
+}
+
+/* ===============================
+   按钮样式
+================================= */
+button {
+  background-color: #87cefa; /* 浅蓝 */
+  color: #fff;
+  font-size: 1em;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 2px auto;
+  display: block;
+}
+
+button:hover {
+  background-color: #febdde;
+}
+
+button:active {
+  background-color: #febdde;
+}
+
+/* ===============================
+   下拉框样式
+================================= */
+select {
+  font-size: 1em;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #e0f0ff;
+  color: #333;
+  outline: none;
+  margin: 10px auto;
+  display: block;
+  width: 50% ;       /* 宽度和下拉框一致 */
+  max-width: 300px ; /* 最大宽度限制 */
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+select:hover {
+  background-color: #febdde;
+}
+
+select:active {
+  background-color: #febdde;
+}
+
+/* ===============================
+   表格或结果信息居中
+================================= */
+#resultContainer {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+/* ===============================
+   响应式适配
+================================= */
+@media (max-width: 480px) {
+  h1 { font-size: 1.6em; }
+  h2 { font-size: 1.2em; }
+  p, label { font-size: 0.9em; }
+  .idol-img { max-width: 150px; }
+  button { width: 80%; }
+  select { width: 80%; }
+}
+
+/* ===============================
+   昵称输入框样式
+================================= */
+input[type="text"] {
+  font-size: 1em;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #e0f0ff;
+  color: #333;
+  outline: none;
+  margin: 10px auto;
+  display: block;
+  width: 50%;       /* 宽度和下拉框一致 */
+  max-width: 300px; /* 最大宽度限制 */
+  cursor: text;
+  transition: background 0.3s;
+}
+
+input[type="text"]:hover {
+  background-color: #febdde;
+}
+
+input[type="text"]:active,
+input[type="text"]:focus {
+  background-color: #febdde;
+}
+.button-group {
+    display: flex;
+    gap: 15px; /* 按钮之间的间距 */
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-restart, .btn-share {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+    font-weight: bold;
+}
+
+.btn-restart {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.btn-share {
+    background-color: #ff6b6b; /* 醒目的分享色 */
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.btn-share:active {
+    transform: scale(0.95);
+}
+
+/* 提示框样式 */
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.3s, bottom 0.3s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}

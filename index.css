@@ -1,0 +1,231 @@
+/* ===============================
+   1. 全局与背景
+================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'PingFang SC', 'Helvetica Neue', sans-serif;
+  color: #444;
+  background: linear-gradient(135deg, #ffecf2 0%, #e6f4ff 50%, #fff0f6 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景光晕 */
+.bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+  z-index: 0;
+  animation: float 20s infinite ease-in-out;
+}
+.shape-1 {
+  width: 300px; height: 300px;
+  background: #ffadd2;
+  top: -50px; left: -50px;
+}
+.shape-2 {
+  width: 250px; height: 250px;
+  background: #bae7ff;
+  bottom: -50px; right: -50px;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, 40px); }
+}
+
+/* ===============================
+   2. 主卡片 (磨砂玻璃)
+================================= */
+.main-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 380px; /* 稍微窄一点，更精致 */
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 0 5px 15px rgba(255, 133, 179, 0.1);
+  padding: 35px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px; /* 增加间距，拒绝拥挤 */
+}
+
+/* ===============================
+   3. 头部样式
+================================= */
+.card-header { text-align: center; }
+
+h1 {
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #333;
+  margin-bottom: 6px;
+  background: linear-gradient(90deg, #ff85b3, #6ecbff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+h1 .highlight {
+  display: block;
+  font-size: 2.1rem;
+  margin-top: 2px;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.author-sign {
+  font-size: 0.75rem;
+  color: #999;
+  letter-spacing: 1px;
+}
+
+/* ===============================
+   4. 表单通用
+================================= */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #555;
+  padding-left: 4px;
+}
+
+/* 输入框 & 下拉框 统一风格 */
+input[type="text"],
+select {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #333;
+  transition: all 0.3s ease;
+  appearance: none; /* 移除默认样式 */
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+/* 输入框特有 */
+.input-wrapper { position: relative; }
+input[type="text"] { padding-left: 42px; }
+.input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+/* 下拉框特有：自定义箭头 */
+select {
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ff85b3%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 14px;
+  padding-right: 40px; /* 给箭头留位置 */
+}
+
+/* 聚焦状态 */
+input[type="text"]:focus,
+select:focus {
+  background: #fff;
+  border-color: #ff85b3;
+  box-shadow: 0 0 0 4px rgba(255, 133, 179, 0.15);
+  transform: translateY(-2px);
+}
+
+/* 占位符颜色 */
+::placeholder { color: #aaa; }
+select option { color: #333; } /* 确保下拉选项文字清晰 */
+
+/* ===============================
+   5. 提示框与按钮
+================================= */
+.tip-box {
+  /* 改小字体 */
+  font-size: 0.7rem; 
+  
+  /* 减小内边距，让盒子更紧凑 */
+  padding: 8px 12px; 
+  
+  /* 增加透明度，让它更淡一点，不抢眼 */
+  background: rgba(255, 255, 255, 0.3); 
+  border: 1px dashed rgba(0,0,0,0.05); /* 边框也变淡 */
+  
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px; /* 图标和文字间距稍微缩小 */
+  color: #888; /* 文字颜色变浅灰 */
+  line-height: 1.4;
+}
+
+.tip-icon { 
+  font-size: 0.9rem; /* 图标也稍微变小 */
+  opacity: 0.8;
+}
+
+.tip-box p { 
+  margin: 0; 
+  font-weight: 400; /* 取消加粗，更轻盈 */
+}
+
+/* ===============================
+   6. 动画与适配
+================================= */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: var(--delay, 0s);
+}
+
+.shake {
+  animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+  border-color: #ff4d4d !important;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+@media (max-width: 380px) {
+  h1 { font-size: 1.5rem; }
+  h1 .highlight { font-size: 1.8rem; }
+  .main-card { padding: 25px 20px; }
+}

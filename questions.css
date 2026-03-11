@@ -1,0 +1,262 @@
+/* ===============================
+   全局重置 (防止不同页面的默认样式冲突)
+================================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+  background: linear-gradient(135deg, #ffd6ec 0%, #cde8ff 100%);
+  color: #333;
+}
+
+/* ===============================
+   主体卡片容器 (统一风格)
+================================= */
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  /* 增加内边距，给伪元素留出空间 */
+  padding: 50px 25px 30px 25px; 
+  border-radius: 20px;
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden; /* 防止内容溢出圆角 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===============================
+   【步骤1】隐藏所有旧的 h2 标题
+   (无论它在 HTML 的哪个位置，统统隐藏)
+================================= */
+h2 {
+  display: none !important;
+}
+
+/* ===============================
+   【步骤2】强制插入新标题 (伪元素)
+   (固定在容器最顶部，不受 HTML 顺序影响)
+================================= */
+.container::before {
+  content: "时代峰峻缘分测试";
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
+  
+  /* 渐变文字 */
+  background: linear-gradient(90deg, #ff7eb3, #7afcff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  position: absolute;
+  top: 20px;
+  left: 0;
+  z-index: 10;
+}
+
+/* ===============================
+   【步骤3】强制插入进度条 (伪元素)
+   (固定在新标题下方)
+================================= */
+.container::after {
+  content: "";
+  display: block;
+  width: 80%; /* 进度条宽度 */
+  height: 8px;
+  background-color: #eef2f7;
+  border-radius: 10px;
+  margin: 0 auto 10px auto; /* 居中 */
+  position: absolute;
+  top: 65px; /* 标题高度 + 间距 */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+  
+  /* 
+     ⚠️ 注意：这里默认是第1题 (12.5%) 
+     如果要改进度，请看下方的“如何修改不同题目”说明
+  */
+  background-image: linear-gradient(90deg, 
+    #ff9ed6 0%, 
+    #ff9ed6 12.5%, 
+    #eef2f7 12.5%, 
+    #eef2f7 100%
+  );
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* ===============================
+   【步骤4】智能识别并美化“问题文本”
+   (寻找包含问号的 p 标签，或者第一个非表单的 p 标签)
+================================= */
+/* 选中所有 p 标签，但排除 form 里面的 p (如果有) */
+.container > p, 
+.container p:not(form p) {
+  /* 确保只处理第一个看起来像题目的 p */
+  /* 如果页面有多个 p，可能需要更具体的选择器，但通常题目是第一个 p */
+}
+
+/* 针对题目段落的通用美化 */
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 40px 0 25px 0; /* 上方留出空间给绝对定位的进度条 */
+  color: #2d3748;
+  font-weight: 600;
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 12px;
+  border-left: 4px solid #8fd3ff;
+  text-align: left;
+  width: 100%;
+  animation: fadeIn 0.5s ease-out;
+  position: relative;
+  z-index: 1;
+}
+
+/* 在题目上方插入“第 X 题”文字 (利用 p::before) */
+p::before {
+  content: "第 1 题 / 共 8 题"; /* ⚠️ 默认第1题，修改方法见下文 */
+  display: block;
+  font-size: 0.75rem;
+  color: #8898aa;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* ===============================
+   【步骤5】万能选项卡片化
+   (只要检测到 radio + label 结构，立即生效)
+================================= */
+
+/* 1. 隐藏所有单选框 */
+input[type="radio"] {
+  display: none;
+}
+
+/* 2. 美化所有关联的 label */
+/* 选择器逻辑：找到 input[type=radio] 紧邻的 label */
+input[type="radio"] + label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 14px 16px;
+  margin: 8px 0;
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  font-size: 0.95rem;
+  color: #4a5568;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* 悬停效果 */
+input[type="radio"] + label:hover {
+  border-color: #b3e5fc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(143, 211, 255, 0.15);
+}
+
+/* 3. 选中状态高亮 */
+input[type="radio"]:checked + label {
+  border-color: #ff9ed6;
+  background: linear-gradient(to right, #fff0f6, #fff);
+  box-shadow: 0 4px 15px rgba(255, 158, 214, 0.25);
+  transform: scale(1.01);
+  font-weight: 600;
+  color: #d63384;
+}
+
+/* 4. 选中后显示对勾 */
+input[type="radio"]:checked + label::after {
+  content: '✔';
+  margin-left: auto;
+  color: #ff9ed6;
+  font-weight: bold;
+  font-size: 1.2rem;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ===============================
+   【步骤6】按钮美化
+================================= */
+button, 
+input[type="button"], 
+input[type="submit"] {
+  width: 100%;
+  margin-top: 15px;
+  padding: 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #ff9ed6, #8fd3ff);
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(143, 211, 255, 0.4);
+  transition: all 0.3s ease;
+  outline: none;
+  display: block; /* 强制占满一行 */
+}
+
+button:hover, 
+input[type="button"]:hover, 
+input[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(143, 211, 255, 0.6);
+  filter: brightness(1.05);
+}
+
+/* ===============================
+   动画定义
+================================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+/* 手机适配 */
+@media (max-width: 400px) {
+  .container {
+    padding: 60px 20px 20px 20px;
+  }
+  .container::before {
+    font-size: 1.4rem;
+    top: 15px;
+  }
+  .container::after {
+    top: 55px;
+  }
+  p {
+    margin-top: 35px;
+    font-size: 1rem;
+  }
+}

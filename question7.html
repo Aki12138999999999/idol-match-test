@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨时代峰峻缘分测试 - 问题7✨</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="questions.css">
+<style>
+  /* 第7题：进度 87.5% */
+  .container::after {
+    background-image: linear-gradient(90deg, #ff9ed6 0%, #ff9ed6 87.5%, #eef2f7 87.5%, #eef2f7 100%) !important;
+  }
+  p::before {
+    content: "第 7 题 / 共 8 题" !important;
+  }
+</style>
+<body>
+<div class="container">
+<h2>问题 7</h2>
+<p>突然接到了一个从未做过的复杂任务，没有任何现成经验可循。这一刻，你大脑里的“启动程序”是怎样的？</p>
+
+<form id="q7Form">
+  <input type="radio" name="q7" value="丙火" id="q7A">
+  <label for="q7A">直接冲上去尝试，边做边学，哪怕撞了南墙再回头，相信车到山前必有路，气势不能输</label>
+
+  <input type="radio" name="q7" value="庚金" id="q7B">
+  <label for="q7B">迅速分析问题的核心难点，寻找最高效的手段，制定一套严密的执行方案，直击要害</label>
+
+  <input type="radio" name="q7" value="甲木" id="q7C">
+  <label for="q7C">思考这件事的长远意义和根本目标，搭建好整体框架，只要主干立住了，细节可以慢慢长出来</label>
+
+  <input type="radio" name="q7" value="癸水" id="q7D">
+  <label for="q7D">不急着动手，而是默默收集信息，观察周围人的反应，寻找最柔和、阻力最小的切入点，顺势而为</label><br>
+
+  <button type="button" id="nextBtn">下一题</button>
+</form>
+
+<script>
+document.getElementById("nextBtn").addEventListener("click", function() {
+  const answer = document.querySelector('input[name="q7"]:checked');
+  if (!answer) {
+    alert("请选择一个选项！");
+    return;
+  }
+
+  // 保存答案到 localStorage
+  localStorage.setItem("q7", answer.value);
+
+  // 跳转到第八题
+  window.location.href = "question8.html";
+});
+</script>
+</div>
+</body>
+</html>

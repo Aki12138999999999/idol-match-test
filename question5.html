@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨时代峰峻缘分测试 - 问题5✨</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="questions.css">
+<style>
+  /* 第5题：进度 62.5% */
+  .container::after {
+    background-image: linear-gradient(90deg, #ff9ed6 0%, #ff9ed6 62.5%, #eef2f7 62.5%, #eef2f7 100%) !important;
+  }
+  p::before {
+    content: "第 5 题 / 共 8 题" !important;
+  }
+</style>
+<body>
+<div class="container">
+<h2>问题 5</h2>
+<p>你和关系很好的人因为小事吵了一架，两人都不说话，气氛有点僵。过了一会儿，你气消了，想缓和一下关系。这时候，你最顺手、最自然的“破冰”动作是？</p>
+
+<form id="q5Form">
+  <input type="radio" name="q5" value="丙火" id="q5A">
+  <label for="q5A">憋不住，直接开口：“刚才是我态度不好，别生气了。”有什么说什么</label>
+
+  <input type="radio" name="q5" value="庚金" id="q5B">
+  <label for="q5B">先自己把前因后果理一遍，然后走过去平静地说：“刚才那件事，我觉得我们可以这样解决……”只谈事，不谈情绪</label>
+
+  <input type="radio" name="q5" value="癸水" id="q5C">
+  <label for="q5C">什么都不说，默默给对方倒杯水，或者切盘水果放旁边，然后该干嘛干嘛，等对方自己慢慢软化下来</label>
+
+  <input type="radio" name="q5" value="乙木" id="q5D">
+  <label for="q5D">发个搞笑表情包，或者突然拿出个小零食逗对方笑：“哎呀，你看这个好丑”，用幽默把尴尬揭过去</label><br>
+
+  <button type="button" id="nextBtn">下一题</button>
+</form>
+
+<script>
+document.getElementById("nextBtn").addEventListener("click", function() {
+  const answer = document.querySelector('input[name="q5"]:checked');
+  if (!answer) {
+    alert("请选择一个选项！");
+    return;
+  }
+
+  // 保存选项到 localStorage
+  localStorage.setItem("q5", answer.value);
+
+  // 跳转到第六题
+  window.location.href = "question6.html";
+});
+</script>
+</div>
+</body>
+</html>

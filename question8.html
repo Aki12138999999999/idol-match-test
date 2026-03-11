@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨时代峰峻缘分测试 - 问题8✨</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="questions.css">
+<style>
+  /* 第8题：进度 100% */
+  .container::after {
+    background-image: linear-gradient(90deg, #ff9ed6 0%, #ff9ed6 100%, #eef2f7 100%, #eef2f7 100%) !important;
+  }
+  p::before {
+    content: "第 8 题 / 共 8 题" !important;
+  }
+</style>
+<body>
+<div class="container">
+<h2>问题 8</h2>
+<p>忙碌了一整天，终于拥有了完全属于自己的时间，不需要迎合任何人。此时此刻，你本能地最想把自己置于什么样的场景中？</p>
+
+<form id="q8Form">
+  <input type="radio" name="q8" value="丁火" id="q8A">
+  <label for="q8A">窝在沙发角落或窗边，关掉大灯，只留一盏暖黄的小台灯，裹着毯子发呆，感受那份独属于自己的静谧温暖</label>
+
+  <input type="radio" name="q8" value="乙木" id="q8B">
+  <label for="q8B">漫无目的地走在昏黄的路灯下，或者在房间里摆弄花草、整理小物件，思绪随风飘动，享受那种轻松自在的舒展感</label>
+
+  <input type="radio" name="q8" value="癸水" id="q8C">
+  <label for="q8C">躲在书房或卧室的安静角落，听着窗外的雨声或白噪音，独自梳理一天的情绪，让思绪像水流一样慢慢沉淀下来</label>
+
+  <input type="radio" name="q8" value="庚金" id="q8D">
+  <label for="q8D">洗漱完毕，坐在整洁的桌前或床上，拿出笔记本复盘今天的得失，规划明天的步骤，看着清晰的条理感到无比踏实</label><br>
+
+  <button type="button" id="finishBtn">完成测试</button>
+</form>
+
+<script>
+document.getElementById("finishBtn").addEventListener("click", function() {
+  const answer = document.querySelector('input[name="q8"]:checked');
+  if (!answer) {
+    alert("请选择一个选项！");
+    return;
+  }
+
+  // 保存答案到 localStorage
+  localStorage.setItem("q8", answer.value);
+
+  // 跳转到结果页
+  window.location.href = "results.html";
+});
+</script>
+</div>
+</body>
+</html>

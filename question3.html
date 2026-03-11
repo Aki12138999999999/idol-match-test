@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨时代峰峻缘分测试 - 问题 3✨</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="questions.css">
+<style>
+  /* 第3题：37.5% */
+  .container::after {
+    background-image: linear-gradient(90deg, #ff9ed6 0%, #ff9ed6 37.5%, #eef2f7 37.5%, #eef2f7 100%) !important;
+  }
+  p::before {
+    content: "第 3 题 / 共 8 题" !important;
+  }
+</style>
+<body>
+     <div class="container">
+  <h2>问题 3</h2>
+  <p>亲近的人快要过生日了，你打算送一份礼物。在挑选和准备的过程中，你最看重、最花心思的地方是哪里？</p>
+
+  <form id="q3Form">
+    <input type="radio" name="q3" value="丁火" id="q3A">
+    <label for="q3A">不买现成的，非要自己动手做。哪怕做得不完美，也要一针一线、一笔一画地把心意缝进去</label>
+
+    <input type="radio" name="q3" value="辛金" id="q3B">
+    <label for="q3B">跑遍商场或刷遍网页，只为挑一个质感最好、包装最精致、品牌最拿得出手的，绝不允许有瑕疵</label>
+
+    <input type="radio" name="q3" value="甲木" id="q3C">
+    <label for="q3C">不想送普通的，绞尽脑汁想一个从未有过的创意，或者策划一场意想不到的惊喜环节，主打一个“好玩”。</label>
+
+    <input type="radio" name="q3" value="戊土" id="q3D">
+    <label for="q3D">不看花哨的，专门挑对方当下最缺、最实用的东西（如家电、保暖衣物），觉得能用得上才是硬道理。</label><br>
+
+    <button type="button" id="nextBtn">下一题</button>
+  </form>
+
+  <script>
+    // 测试读取昵称和前两题答案
+    console.log("昵称：", localStorage.getItem("nickname"));
+    console.log("星座：", localStorage.getItem("star"));
+    console.log("MBTI：", localStorage.getItem("mbti"));
+    console.log("第一题答案：", localStorage.getItem("q1"));
+    console.log("第二题答案：", localStorage.getItem("q2"));
+
+    document.getElementById("nextBtn").addEventListener("click", function () {
+      const answer = document.querySelector('input[name="q3"]:checked');
+      if (!answer) {
+        alert("请选择一个选项！");
+        return;
+      }
+
+      // 保存第三题答案
+      localStorage.setItem("q3", answer.value);
+
+      // 跳转到第四题
+      window.location.href = "question4.html";
+    });
+  </script>
+</div>
+</body>
+</html>

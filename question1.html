@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨时代峰峻缘分测试 - 问题 1✨</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="questions.css">
+
+<body>
+    <div class="container">
+ <h2>问题 1</h2>
+ <p>终于到了周末，不用定闹钟，窗外天气不错。没有任何安排，你醒来后的第一个本能念头是想做什么？</p>
+
+ <form id="q1Form">
+  <input type="radio" name="q1" value="丙火" id="q1A">
+  <label for="q1A">立马起床，约朋友出去吃顿好的，或者去人多的地方凑凑热闹</label>
+
+  <input type="radio" name="q1" value="庚金" id="q1B">
+  <label for="q1B">先列个计划表，把家里收拾干净，按部就班地做完该做的事</label>
+
+  <input type="radio" name="q1" value="甲木" id="q1C">
+  <label for="q1C">去公园或菜市场转转，看看花草，买点新鲜食材回来做饭</label>
+
+  <input type="radio" name="q1" value="癸水" id="q1D">
+  <label for="q1D">拉上窗帘继续睡，或者窝在沙发上发呆、看电影，谁也别来打扰</label><br>
+
+  <button type="button" id="nextBtn">下一题</button>
+ </form>
+
+ <script>
+    document.getElementById("nextBtn").addEventListener("click", function() {
+   const answer = document.querySelector('input[name="q1"]:checked');
+   if (!answer) {
+    alert("请选择一个选项！");
+    return;
+    }
+
+  // 保存选项到 localStorage
+  localStorage.setItem("q1", answer.value);
+
+  // 跳转到第二题
+  window.location.href = "question2.html";
+  });
+ </script>
+ </div>
+</body>
+</html>

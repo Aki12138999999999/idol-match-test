@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨时代峰峻缘分测试 - 问题4✨</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="questions.css">
+<style>
+  /* 第4题：进度 50% */
+  .container::after {
+    background-image: linear-gradient(90deg, #ff9ed6 0%, #ff9ed6 50%, #eef2f7 50%, #eef2f7 100%) !important;
+  }
+  p::before {
+    content: "第 4 题 / 共 8 题" !important;
+  }
+</style>
+<body>
+<div class="container">
+<h2>问题 4</h2>
+<p>在会议或课堂上，你提交的一个方案/作业里有个明显的低级错误，被领导或老师当场点名指出来了。周围人都看着你，空气突然安静。这一刻，你脑子里蹦出的第一个念头和身体反应是？</p>
+
+<form id="q4Form">
+  <input type="radio" name="q4" value="丙火" id="q4A">
+  <label for="q4A">脸瞬间红到耳根，但马上大声回应：“哎呀是我疏忽了！我马上改！”甚至还会开个玩笑化解尴尬，绝不冷场</label>
+
+  <input type="radio" name="q4" value="甲木" id="q4B">
+  <label for="q4B">心里虽然咯噔一下，但表面强装镇定，迅速在脑子里过一遍补救方案，甚至想好怎么反驳或解释这个错误的合理性</label>
+
+  <input type="radio" name="q4" value="丁火" id="q4C">
+  <label for="q4C">恨不得找个地缝钻进去，低着头不说话，心里疯狂自责：“我怎么这么笨”，晚上回家还要反复琢磨这个错误好久</label>
+
+  <input type="radio" name="q4" value="己土" id="q4D">
+  <label for="q4D">乖乖点头认错，拿出本子认真记下批评意见，态度诚恳，心想“下次一定注意，不能再给团队添麻烦了”</label><br>
+
+  <button type="button" id="nextBtn">下一题</button>
+</form>
+
+<script>
+document.getElementById("nextBtn").addEventListener("click", function() {
+  const answer = document.querySelector('input[name="q4"]:checked');
+  if (!answer) {
+    alert("请选择一个选项！");
+    return;
+  }
+
+  // 保存选项到 localStorage
+  localStorage.setItem("q4", answer.value);
+
+  // 跳转到第五题
+  window.location.href = "question5.html";
+});
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>缘分测试结果</title>
+  <!-- 引入新的结果页专用 CSS -->
+  <link rel="stylesheet" href="results.css">
+  <!-- 如果之前的 style.css 有全局重置，也可以保留，但 result.css 优先级更高 -->
+  <!-- <link rel="stylesheet" href="style.css"> --> 
+</head>
+<body>
+
+  <!-- 背景装饰层 (可选，如果 result.css 里写了 body 背景则不需要这个) -->
+  <div class="bg-decoration"></div>
+
+  <!-- 主卡片容器 -->
+  <div class="result-card">
+    
+    <!-- 1. 大标题 -->
+    <h1 class="main-title">✨ 你的专属缘分揭晓 ✨</h1>
+
+    <!-- 2. 照片区域 (带光晕) -->
+    <div class="photo-wrapper">
+      <div class="photo-frame">
+        <!-- 默认图片，JS 会替换 src -->
+        <img id="idolPhoto" src="" alt="缘分对象" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+      </div>
+      <!-- 装饰光点 -->
+      <div class="glow-effect"></div>
+    </div>
+
+    <!-- 3. 名字与匹配度 (醒目展示) -->
+    <div class="match-header">
+      <h2 id="idolName">加载中...</h2>
+      <div class="match-score-badge">
+        匹配度 <span id="matchScore">0</span>%
+      </div>
+    </div>
+
+    <!-- 4. 专属语录 (气泡框) -->
+    <div class="quote-container">
+      <div class="quote-bubble">
+        <span class="quote-icon left">“</span>
+        <p id="idolQuote">正在读取他的心声...</p>
+        <span class="quote-icon right">”</span>
+      </div>
+    </div>
+
+    <!-- 5. 信息标签 (胶囊状) -->
+    <div class="info-tags">
+      <span class="tag tag-pink" id="tagConstellation">--</span>
+      <span class="tag tag-blue" id="tagMBTI">--</span>
+      <span class="tag tag-purple" id="tagAttribute">--</span>
+      <span class="tag tag-orange" id="tagAge">--</span>
+    </div>
+
+    <!-- 分隔线 -->
+    <div class="divider"></div>
+
+    <!-- 6. 匹配度排行榜 -->
+    <div class="rank-section">
+      <h3 class="rank-title">🏆 缘分排行榜</h3>
+      <ul class="rank-list" id="rankList">
+        <!-- JS 将自动在这里生成列表项 -->
+        <!-- 示例结构 (由 JS 生成): 
+        <li class="rank-item" data-index="0">
+          <span class="rank-num">1</span>
+          <span class="rank-name">张三</span>
+          <div class="rank-bar"><div class="rank-fill" style="width:98%"></div></div>
+          <span class="rank-score">98%</span>
+        </li> 
+        -->
+      </ul>
+    </div>
+
+    <!-- 结果页底部区域 -->
+<div class="result-footer">
+    <!-- 标题或结果文字在这里... -->
+    
+    <!-- ⬇️ 重点：必须是这个 div 包裹两个 button ⬇️ -->
+    <div class="btn-container">
+        
+        <!-- 按钮 1 -->
+        <button type="button" onclick="window.location.href='index.html'" class="home-btn">
+    再测一次
+</button>
+        
+        <!-- 按钮 2 -->
+        <button type="button" onclick="shareLink()" class="home-btn">
+            分享测试
+        </button>
+        
+    </div>
+</div>
+
+<!-- 提示框 -->
+<div id="toast" class="toast">链接已复制！快发给朋友吧~</div>
+
+
+  <!-- 脚本加载 -->
+  <script src="weights.js"></script>
+  <script src="results.js"></script>
+  
+  <!-- 内联小脚本：确保页面加载完后初始化排行榜 (如果 results.js 里没写的话) -->
+  <script>
+    // 如果 results.js 已经处理了所有渲染，这段可以删除
+    // 这里只是为了确保 DOM 就绪
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof initRanking === 'function') {
+        initRanking();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+/* ===============================
+   1. 全局设置与背景
+================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  /* 梦幻粉蓝极光背景 */
+  background: linear-gradient(135deg, #ffecf2 0%, #e6f4ff 50%, #fff0f6 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #444;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 背景装饰圆圈 (增加氛围感) */
+.bg-decoration {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+.bg-decoration::before, .bg-decoration::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+}
+.bg-decoration::before {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: #ffb7d5;
+}
+.bg-decoration::after {
+  bottom: -10%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: #bce0fd;
+}
+
+/* ===============================
+   2. 主卡片 (磨砂玻璃)
+================================= */
+.result-card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    0 20px 40px rgba(255, 133, 179, 0.15),
+    0 10px 20px rgba(110, 203, 255, 0.1);
+  padding: 30px 25px;
+  text-align: center;
+  animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===============================
+   3. 大标题
+================================= */
+.main-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 25px;
+  background: linear-gradient(90deg, #ff85b3, #6ecbff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(255, 133, 179, 0.2));
+  line-height: 1.3;
+}
+
+/* ===============================
+   4. 照片区域 (改为自适应横长方形)
+================================= */
+.photo-wrapper {
+  position: relative;
+  width: 280px;       /* 宽度调大一点，适合横图 */
+  height: auto;       /* 【关键】高度自动，由图片决定 */
+  margin: 0 auto 20px auto;
+  /* 可选：如果你想强制保持 16:9 比例，可以加下面这行，否则就按图片原比例 */
+  aspect-ratio: 4 / 3;
+}
+
+.photo-frame {
+  width: 100%;
+  height: 100%;       /* 填满父容器 */
+  border-radius: 20px; /* 圆角大小，横图可以稍微大一点 */
+  overflow: hidden;
+  border: 4px solid #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 2;
+  background: #fff;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* 如果图片比例不一致，这会裁剪多余部分但保持充满 */
+  /* 如果你想完全显示整张图不裁剪，改成 object-fit: contain; 但可能会有留白 */
+  transition: transform 0.5s ease;
+  display: block;     /* 防止底部留白 */
+}
+
+/* 动态光晕 (也要适应长方形) */
+.glow-effect {
+  position: absolute;
+  top: -6px; left: -6px; right: -6px; bottom: -6px; /* 上下左右留边 */
+  border-radius: 20px; /* 和 frame 保持一致 */
+  background: linear-gradient(45deg, #ff85b3, #6ecbff, #ffecf2);
+  z-index: 1;
+  filter: blur(12px);
+  opacity: 0.8;
+  animation: pulseGlow 3s infinite alternate;
+}
+/* ===============================
+   5. 名字与匹配度徽章
+================================= */
+.match-header {
+  margin-bottom: 20px;
+}
+
+#idolName {
+  font-size: 1.6rem;
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.match-score-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, #ff85b3, #ff69b4);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+}
+
+/* ===============================
+   6. 语录气泡 (重点美化)
+================================= */
+.quote-container {
+  margin-bottom: 25px;
+}
+
+.quote-bubble {
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #ffecf2;
+  border-radius: 20px;
+  padding: 20px;
+  position: relative;
+  text-align: left;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.quote-bubble::before {
+  /* 小三角 */
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent #ffecf2 transparent;
+}
+
+.quote-icon {
+  font-size: 2.5rem;
+  font-family: Georgia, serif;
+  color: #ff85b3;
+  line-height: 0.5;
+  vertical-align: middle;
+}
+.quote-icon.left { margin-right: 5px; }
+.quote-icon.right { margin-left: 5px; }
+
+#idolQuote {
+  display: inline-block;
+  font-size: 1.05rem;
+  color: #555;
+  line-height: 1.6;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+/* ===============================
+   7. 信息标签 (胶囊状)
+================================= */
+.info-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.tag {
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+  transition: transform 0.2s;
+}
+.tag:hover { transform: translateY(-2px); }
+
+/* 不同颜色的标签 */
+.tag-pink { color: #ff69b4; background: #fff0f6; }
+.tag-blue { color: #6ecbff; background: #e6f4ff; }
+.tag-purple { color: #a685ff; background: #f3f0ff; }
+.tag-orange { color: #ffaa69; background: #fff5eb; }
+
+/* ===============================
+   8. 分隔线
+================================= */
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ffd1dc, transparent);
+  margin: 20px 0;
+  opacity: 0.6;
+}
+
+/* ===============================
+   9. 排行榜 (可点击交互)
+================================= */
+.rank-section {
+  text-align: left;
+}
+
+.rank-title {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.rank-list {
+  list-style: none;
+  padding: 0;
+}
+
+.rank-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.rank-item:hover {
+  background: #fff;
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border-color: #ffecf2;
+}
+
+/* 选中状态 (JS 控制添加此类) */
+.rank-item.active {
+  background: #fff;
+  border-color: #ff85b3;
+  box-shadow: 0 0 0 2px rgba(255, 133, 179, 0.2);
+}
+
+.rank-num {
+  font-size: 1.2rem;
+  font-weight: 800;
+  width: 30px;
+  text-align: center;
+  margin-right: 10px;
+}
+/* 前三名颜色 */
+.rank-item:nth-child(1) .rank-num { color: #ffd700; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+.rank-item:nth-child(2) .rank-num { color: #c0c0c0; }
+.rank-item:nth-child(3) .rank-num { color: #cd7f32; }
+
+.rank-name {
+  flex: 1;
+  font-weight: 600;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.rank-bar {
+  width: 80px;
+  height: 6px;
+  background: #eee;
+  border-radius: 3px;
+  margin: 0 10px;
+  overflow: hidden;
+}
+
+.rank-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff85b3, #6ecbff);
+  border-radius: 3px;
+  transition: width 1s ease-out;
+}
+
+.rank-score {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ff69b4;
+  width: 40px;
+  text-align: right;
+}
+
+/* =================================
+   10. 底部按钮区域 (统一风格版)
+   ================================= */
+
+/* 容器：负责让两个按钮并排 */
+.btn-container {
+  display: flex;
+  justify-content: space-between; /* 两端对齐 */
+  gap: 15px;                      /* 中间间距 */
+  margin-top: 25px;
+  width: 100%;
+}
+
+/* 统一按钮样式：两个按钮都长这样 */
+.home-btn {
+  flex: 1;                        /* 两个按钮平分宽度 */
+  padding: 12px;
+  border: none;
+  border-radius: 50px;            /* 圆角 */
+  background: #fff;               /* 白底 */
+  color: #666;                    /* 灰字 */
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: all 0.3s;
+  white-space: nowrap;            /* 防止文字换行 */
+  text-align: center;
+  display: flex;                  /* 让图标和文字垂直居中 */
+  align-items: center;
+  justify-content: center;
+}
+
+/* 悬停效果：两个按钮都一样 */
+.home-btn:hover {
+  background: #f0f0f0;            /* 变浅灰 */
+  transform: translateY(-2px);    /* 微微上浮 */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+/* 点击效果 (可选，增加按压感) */
+.home-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* 提示框 Toast 样式 (保持不变) */
+.toast {
+  visibility: hidden;
+  min-width: 200px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 12px;
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s, bottom 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+  bottom: 50px;
+}
+
+/* ===============================
+   11. 移动端适配
+================================= */
+@media (max-width: 480px) {
+  .result-card { padding: 20px 15px; }
+  .main-title { font-size: 1.5rem; }
+  .photo-wrapper { width: 150px; height: 150px; }
+  #idolQuote { font-size: 0.95rem; }
+  .rank-bar { width: 60px; }
+}
+

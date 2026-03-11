@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨时代峰峻缘分测试 - 问题 2✨</title>
+  <style>
+    /* 第2题：25% */
+    .container::after {
+      background-image: linear-gradient(90deg, #ff9ed6 0%, #ff9ed6 25%, #eef2f7 25%, #eef2f7 100%) !important;
+    }
+    p::before {
+      content: "第 2 题 / 共 8 题" !important;
+    }
+  </style>
+</head>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="questions.css">
+
+<body>
+    <div class="container">
+  <h2>问题 2</h2>
+  <p>周末你本来精心打扮准备出门，结果突然暴雨，你被迫宅在家里。妆都化好了，衣服也穿好了，现在哪儿也去不了。这一刻，你最真实、最下意识的举动是？</p>
+
+  <form id="q2Form">
+    <input type="radio" name="q2" value="丙火" id="q2A">
+    <label for="q2A">打开音响放首嗨歌，自己在客厅跟着跳两下，把家里当舞台</label>
+
+    <input type="radio" name="q2" value="壬水" id="q2B">
+    <label for="q2B">顺势卸妆换睡衣，往沙发上一躺，顺手点开一部存了很久的长电影，慢慢看到睡着</label>
+
+    <input type="radio" name="q2" value="乙木" id="q2C">
+    <label for="q2C">拿起手机疯狂刷短视频，或者给好几个朋友发消息吐槽：“气死我了，这雨真烦人！”</label>
+
+    <input type="radio" name="q2" value="庚金" id="q2D">
+    <label for="q2D">虽然不出门了，但还是要把衣服叠好放回柜子，把桌子收拾干净，然后按计划看书或工作。</label><br>
+
+    <button type="button" id="nextBtn">下一题</button>
+  </form>
+
+  <script>
+    // 测试能读取第一题和昵称
+    console.log("昵称：", localStorage.getItem("nickname"));
+    console.log("星座：", localStorage.getItem("star"));
+    console.log("MBTI：", localStorage.getItem("mbti"));
+    console.log("第一题答案：", localStorage.getItem("q1"));
+
+    document.getElementById("nextBtn").addEventListener("click", function () {
+      const answer = document.querySelector('input[name="q2"]:checked');
+      if (!answer) {
+        alert("请选择一个选项！");
+        return;
+      }
+
+      // 保存第二题答案
+      localStorage.setItem("q2", answer.value);
+
+      // 跳转到第三题
+      window.location.href = "question3.html";
+    });
+  </script>
+</div>
+</body>
+</html>
