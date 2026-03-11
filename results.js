@@ -355,6 +355,19 @@ function renderRanking(sortedList) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  // 【新增】1. 获取首页输入的昵称，如果没有则用默认值
+  // 注意：这里假设你在首页保存到了 localStorage，key 是 "nickname"
+  // 如果你的首页 key 不一样，请修改引号里的内容
+  const savedNickname = localStorage.getItem("nickname"); 
+  const displayName = savedNickname ? savedNickname : "有缘人";
+
+  // 【新增】2. 动态修改标题
+  const titleEl = document.getElementById('result-title');
+  if (titleEl) {
+    titleEl.innerText = `✨ ${displayName} 的专属缘分揭晓 ✨`;
+  }
+
+  // --- 原有逻辑保持不变 ---
   const sortedList = calculateScores();
   
   if (sortedList.length > 0) {
@@ -399,4 +412,5 @@ function showToast(message) {
         toast.className = "toast show";
         setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
     }
+
 }
